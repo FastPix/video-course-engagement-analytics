@@ -20,6 +20,7 @@ It gives LMS and e-learning teams learner engagement and progress signals from v
 ## Contents
 
 - [Get started](#get-started)
+  - [Try it with demo data](#try-it-with-demo-data)
 - [Why FastPix Learner Signals?](#why-fastpix-learner-signals)
 - [Who it's for](#who-its-for)
 - [Features](#features)
@@ -47,7 +48,14 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000), go to **Connector** and drop in a views export CSV.
 
-No export yet? Use the sample in this repo: `public/sample/fastpix-views-export-lms-demo.csv` (100 students, 3 courses, 30 lessons, 1,127 views).
+### Try it with demo data
+
+No FastPix export yet? Use the demo file in this repo: [`fastpix-views-export-lms-demo.csv`](fastpix-views-export-lms-demo.csv) (100 students, 3 courses, 30 lessons, 1,127 views from 27 Jul to 5 Oct 2026).
+
+1. Download it: open [the file on GitHub](https://github.com/FastPix/video-course-engagement-analytics/blob/main/fastpix-views-export-lms-demo.csv) and click **Download raw file**, or use it straight from your clone (it sits in the project root).
+2. Start the app (`npm run dev`) and open [http://localhost:3000](http://localhost:3000).
+3. Go to **Connector** and drop the file into **Upload CSV** (or click the drop zone and pick it).
+4. Every screen fills in. Pick a course in the sidebar to explore.
 
 ## Why FastPix Learner Signals?
 
@@ -284,7 +292,8 @@ npm install
 | `lib/types.ts` | The data shapes |
 | `lib/store.ts` | App state, and saving your upload in the browser |
 | `lib/csv/` | CSV parsing (Papa Parse) and the background parser |
-| `public/sample/` | A sample views export to try the app with |
+| `fastpix-views-export-lms-demo.csv` | Demo views export to try the app with (see [Try it with demo data](#try-it-with-demo-data)) |
+| `public/sample/` | The same demo export, also served by the app |
 | `public/brand/` | FastPix logo files |
 | `app/api/exports/route.ts` | Placeholder for the Exports API (see FAQ) |
 
