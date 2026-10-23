@@ -3,7 +3,8 @@ import { create } from 'zustand';
 import { buildDataset } from '@/lib/model/dataset';
 import type { ActionKind, Band, Dataset, Health, LoadOptions, LoadReport, LoadResult } from '@/lib/types';
 
-export type Source = 'Your file' | 'FastPix API';
+export type Source = 'Your file' | 'FastPix API' | 'Demo data';
+const DEMO_CSV = 'fastpix-views-export-lms-demo.csv'; // served from public/
 export type CsvFile = { name: string; text: string };
 export const ACTION_LABEL = { tutor_call: 'Tutor call', plan_reset: 'Plan reset', catch_up: 'Catch-up', nudge: 'Nudge' } as const;
 
@@ -101,7 +102,13 @@ export async function restoreSaved() {
       // Target dates are saved with the upload, so Pace survives a reload.
       if (saved.targetDates) useStore.setState({ targetDates: saved.targetDates });
       await loadFiles(saved.files, saved.source, { save: false });
+    } else if (!useStore.getState().dataset) {
+      // No upload yet: show the demo export so a fresh visit is not blank. Not saved, so any upload replaces it.
+      const res = await fetch(`/${DEMO_CSV}`);
+      if (res.ok) await loadFiles([{ name: DEMO_CSV, text: await res.text() }], 'Demo data', { save: false });
     }
+  } catch {
+    // ponytail: demo failing to load just leaves the "No data yet" screen.
   } finally {
     useStore.setState({ restored: true });
   }
